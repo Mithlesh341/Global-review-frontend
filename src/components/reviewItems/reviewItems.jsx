@@ -38,61 +38,87 @@
 // export default reviewItems
 
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios"; 
+import star from '../../assets/ss.png'
 
-const ProductDetails = () => {
-    const [products, setProducts] = useState([]);
-    const [loading,setLoading]=useState(true);
+const ProductDetails = ({ productName,
+    date,
+    productCategory,
+    rating,
+    reviewTitle,
+    review,
+    userName,
+    image }) => {
+        const d=new Date(date);
+        let options = {
+            weekday: 'long',
+            day: 'numeric',
+            hour: "numeric",
+        
+            timeZone: 'Asia/Kolkata'
+        };
+        const hour = d.toLocaleTimeString("en-IN", options);
+    // const [products, setProducts] = useState([]);
+    // const [loading,setLoading]=useState(true);
 
-    useEffect(() => {
-        axios
-            .get("http://localhost:5500/api/review/list") 
-            .then((response) =>{
-                console.log(response.data.data);
-                setProducts(response.data.data);
-                // if(products.length>0){
-                // setLoading(false);
-                // console.log(products);
-                // }    
-                if(products.length>0){ 
-                console.log(products);
-                setLoading(false);
-                }   
+    // useEffect(() => {
+    //     axios
+    //         .get("http://localhost:5500/api/review/list") 
+    //         .then((response) =>{
+    //             console.log(response.data.data);
+    //             setProducts(response.data.data);
+    //             // if(products.length>0){
+    //             // setLoading(false);
+    //             // console.log(products);
+    //             // }    
+    //             if(products.length>0){ 
+    //             console.log(products);
+    //             setLoading(false);
+    //             }   
                         
-            })
-            .catch((error) => console.error("Error fetching product:", error));
-    }, []);
+    //         })
+    //         .catch((error) => console.error("Error fetching product:", error));
+    // }, []);
     // if (!products) return <p>Loading...</p>;
 
     return (
-        <div >
-            {loading && <h1>loading</h1>}
-           {!loading && products && products[0].map((product)=>{
-            <div>
-            <h2>{product.productName}</h2>
-            <p><strong>Category:</strong> {product.productCategory}</p>
-            <p><strong>Rating:</strong>  {product.rating}/5</p>
-            <p><strong>Review:</strong> {product.reviewTitle} - {product.review}</p>
-            <p><strong>Reviewer:</strong> {product.userName}</p>
-            </div>
-     })}
-          
-            {/* <div>
-            <h2>{products[0].productName}</h2>
-            <p><strong>Category:</strong> {products[0].productCategory}</p>
-            <p><strong>Rating:</strong>  {products[0].rating.$numberInt}/5</p>
-            <p><strong>Review:</strong> {products[0].reviewTitle} - {product.review}</p>
-            <p><strong>Reviewer:</strong> {products[0].userName}</p>
-            </div>
-  */}
+    //     <div style={{ backgroundColor: '#e6edf5', borderRadius: 10,padding:8, color: 'black' }}>
+    //     <div style={{width:'100%'}} >
+    //         <img style={{ width:'26vh',height:'26vh', paddingTop: 6 ,borderRadius:'10px', marginLeft: '25px'}} src={`http://localhost:5500/uploads/${image}`} alt="No Image available" />
+    //     </div>
+    //     <div>
+    //         <h2 style={{ color: '#1a2639', paddingTop: 4, paddingBottom: 2, fontFamily: "Poppins, sans-serif" }}> {productName}</h2>
+    //         <p style={{ paddingTop: 6 }}><strong>Category:</strong> {productCategory}</p>
+    //         <p style={{ paddingTop: 6 }}><strong>Rating:</strong>  {rating}/5
+    //           <img src={star} alt="" width={20} height={20} />
+    //         </p>
+    //         <p style={{ paddingTop: 6 }}><strong>Review:</strong> {reviewTitle} - {review}</p>
+    //         <p style={{ paddingTop: 6 }}><strong>Reviewer:</strong> {userName}</p>
+           
+    //     </div>
+    // </div>
 
-            {/* <img 
-                src={http://localhost:5000/uploads/${product.image}} 
-                alt="Product" 
-                style={{ width: "100%", borderRadius: "10px" }} 
-            /> */}
-        </div>
+   
+    <section className="reviews-section">
+ <div className="review-grid" style={{gridGap:'100px'}}>
+       
+<div className="review-card"> 
+    <h3>{productName}</h3>
+    <div className="reviewer-info">
+        <img src={`http://localhost:5500/uploads/${image}`} style={{   width: 160,
+    height: 160 , borderRadius: '10px'}} alt="No image found"/>
+        <div>
+            <strong>{reviewTitle}</strong>   <span>{userName}</span>
+            <div className="stars">{rating}
+              <img src={star} alt="" style={{height:'10px', width: '10px'}} /></div>
+            <span className="time">{hour}</span>
+        </div> 
+    </div>
+    <p>{review}</p>
+</div>
+</div> 
+</section>
     );
 };
 

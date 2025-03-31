@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 //import { food_list } from "../assets/assets";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ const StoreContextProvider = (props) => {
 
    
     const url = "http://localhost:5500"
-   
+    const [token, setToken] = useState("");
     const [reviewlist, setReviewList] = useState([]);
 
 
@@ -20,12 +20,23 @@ const StoreContextProvider = (props) => {
         console.log(response.data.data);
         setReviewList(response.data.data)
     }
-
-
+    useEffect(()=>{
+    async function loadData() {
+        await fetchReviewList()
+        if (localStorage.getItem("token")) {
+            setToken(localStorage.getItem("token"));
+            
+        }
+      }
+      loadData();
+    },[]);
 
     const contextValue ={
+        fetchReviewList,
         reviewlist,
-        url
+        url,
+        token,
+        setToken,
     }
   
     return (

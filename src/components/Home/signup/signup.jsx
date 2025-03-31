@@ -1,12 +1,14 @@
 import React from 'react'
-import { useState } from 'react';
-import './signin.css'
+import { useState} from 'react';
+import './signup.css'
 import axios from 'axios';
 import {toast} from 'react-toastify';
+import {useNavigate} from 'react-router-dom'
 
 
 
 const signin = () => {
+  const nav=useNavigate();
   const [user,setUser]=useState({
     yourName:"",
     yourEmail:"",
@@ -30,7 +32,9 @@ const signin = () => {
     const res=await axios.post("http://localhost:5500/api/review/signup",data);
     if(res.status===200)
     {
-      console.log("successfully created user");
+      let token=res.data.token;
+      localStorage.setItem("token",token);
+      console.log("successfully created user"+token);
        if(res.data.success){
                     setUser({
                      yourName:"",
@@ -38,10 +42,13 @@ const signin = () => {
                      yourPassword:""
                     })
                     toast.success(res.data.message)
+                    nav("/");
+
                  }
                  else{
                     toast.error(res.data.message);
                  }
+
     }
    }
   return (
@@ -50,14 +57,14 @@ const signin = () => {
       <form  className="login-popup-container" onSubmit={onSubmitButton}>
         <div className="login-popup-title">
             <h2>Sign Up</h2>
-
-            <img   alt="" />
+{/* 
+            <img   alt="" /> */}
         </div>
         <div className="login-popup-inputs">
             <input name='yourName' onChange={onChangeButton}  type="text" value={user.yourName} placeholder='Your Name' required />
             
             <input name='yourEmail' onChange={onChangeButton} type="text"   value={user.yourEmail} placeholder='Your Email' required />
-            <input name='yourPassword' onChange={onChangeButton} type="text" value={user.yourPassword}    placeholder='Password' required/>
+            <input name='yourPassword' onChange={onChangeButton} type="password" value={user.yourPassword}    placeholder='Password' required/>
 
         </div>
         <button type='submit'>Create Account</button>

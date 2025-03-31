@@ -82,3 +82,9 @@ body {
 .navbar .menu .dropdown .dropdown-content .more:hover{
     background-color: burlywood;
 }
+
+.navbar .menu .more {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+}

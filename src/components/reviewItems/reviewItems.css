@@ -1,4 +1,4 @@
-.food-item{
+/* .food-item{
     width: 100%;
     margin: auto;
     border-radius: 15px;
@@ -74,4 +74,37 @@
 
 .food-item-counter img{
     width: 30px;
+} 
+
+
+.template {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  3
+    gap: 20px;
+    padding: 0 50px;
 }
+
+
+.template-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: 0.3s;
+}
+
+.template-info{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+*/

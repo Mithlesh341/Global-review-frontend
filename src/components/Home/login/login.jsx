@@ -1,19 +1,62 @@
-import React, { useState } from 'react'
-
+import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 function login() {
-   
+  const nav=useNavigate();
+  const [user,setUser]=useState({
+    yourEmail:"",
+    yourPassword:""
+   });
+   const onChangeButton=(e)=>
+   {
+      setUser({...user,[e.target.name]:e.target.value});
+   }
+   const onSubmitButton=async(e)=>
+   {
+    e.preventDefault();
+    // const formData = new FormData();
+     let data={
+      yourEmail:user.yourEmail,yourPassword:user.yourPassword
+     };
+
+    // formData.append("yourName", user.yourName); // "file" matches backend multer setup
+    // formData.append("yourEmail",user.yourName);
+    // formData.append("yourPassword",user.yourPassword);
+    const res=await axios.post("http://localhost:5500/api/review/login",data);
+    if(res.status===200)
+    {
+      let token=res.data.token;
+      localStorage.setItem("token",token);
+      console.log("successfully created user"+token);
+       if(res.data.success){
+                    setUser({
+                     yourEmail:"",
+                     yourPassword:""
+                    })
+                    toast.success(res.data.message)
+                    nav("/");
+
+                 }
+                 else{
+                    toast.error(res.data.message);
+                 }
+
+    }
+   }
     return (
         <div>
            <div className='login-popup'>
-          <form  className="login-popup-container">
+          <form onSubmit={onSubmitButton} className="login-popup-container">
             <div className="login-popup-title">
                 <h2>Login</h2>
     
                 <img   alt="" />
             </div>
             <div className="login-popup-inputs"> 
-                <input name='email' type="text" placeholder='Your Email' required />
-                <input name='password' type="text" placeholder='Password' required/>
+                <input name='yourEmail' onChange={onChangeButton} type="text" placeholder='Your Email' required />
+                <input name='yourPassword' type="password" onChange={onChangeButton} placeholder='Password' required/>
             </div>
             <button type='submit'>Login</button>
             <div style={{display:'flex', justifyItems:'start'}}>
@@ -22,9 +65,7 @@ function login() {
               <p style={{paddingLeft: 15, paddingTop: 10}}>By continuing, i agree to the terms of use & privacy policy.</p>
             </div>
             </div>
-            {/* {currState==="Login"
-            ?<p>Create a new account? <span onClick={() => setCurrState("Sign Up")}>Click here</span> </p>: */}
-            {/* <p>Don't have an account? <span style={{color:'red'}}>Login here</span></p> */}
+           
           </form>
         </div>
         </div>

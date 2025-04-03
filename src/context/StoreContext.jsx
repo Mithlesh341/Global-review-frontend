@@ -29,7 +29,7 @@ const StoreContextProvider = (props) => {
         }
       }
       loadData();
-    },[]);
+    },[fetchReviewList]);
 
     const contextValue ={
         fetchReviewList,

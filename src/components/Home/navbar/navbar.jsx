@@ -3,8 +3,9 @@ import React, { useContext, useEffect } from 'react';
 import './navbar.css';
 import image from '../../../assets/lo.png';
 import { StoreContext } from '../../../context/StoreContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logout from '../../../assets/logout_icon.png';
+import profile from '../../../assets/profile_icon.png';
 
 const Navbar = ({ setShowLogin }) => {
   const url = "http://localhost:5173/signin";
@@ -36,19 +37,19 @@ const Navbar = ({ setShowLogin }) => {
           <div className="dropdown">
             <a href="/category" className="more">Categories</a>
           </div>
-          <a href={url} style={{ marginRight: "0px", paddingRight: "20px" }}><button style={{fontWeight:'bold'}}>Sign Up</button></a>
+          <Link to={url} style={{ marginRight: "0px", paddingRight: "20px" }}><button style={{fontWeight:'bold'}}>Sign Up</button></Link>
 
           {!token ? (
             
-           <a href='/login'><button onClick={() => setShowLogin(true)}  style={{ marginLeft: "0px", paddingLeft: "15px" }}>
+           <Link to='/login'><button onClick={() => setShowLogin(true)}  style={{ marginLeft: "0px", paddingLeft: "15px" }}>
            Login
-         </button></a> 
+         </button></Link>                                 
           ) : (
             <div className="dropdown">
               <div className="nav-profile-dropdown">
                 <a onClick={logout} style={{ cursor: "pointer" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" style={{width:'30px',height:'30px'}} viewBox="0 0 24 24" fill="white"><path d="M4 18H6V20H18V4H6V6H4V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V18ZM6 11H13V13H6V16L1 12L6 8V11Z"></path></svg>
-                  <p style={{fontSize:15}}>Log Out</p>
+                  <p style={{fontSize:15}}>Log Out <svg style={{width:25,height:25,marginLeft:5}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path></svg> </p>
                 </a>
               </div>
             </div>

@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 
 import cm from "../../../assets/coffeemachine.jpeg"
 import { StoreContext } from "../../../context/StoreContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const section = () => {
@@ -24,11 +24,15 @@ const section = () => {
     let arr;
     const [results,setResults]=useState([]);
      const [search,setSearch]=useState('');
+     const latestone=reviewlist.filter((element,idx)=>
+    {
+        return element.status==="Approved";
+    })
      const onChangeSubmit=(e)=>
         {
             let newVal=e.target.value;
             setSearch(newVal);
-           arr= reviewlist.filter((element,idx)=>{
+           arr= latestone.filter((element,idx)=>{
             return (element.productName).includes(newVal);
         });
            setResults(arr);
@@ -52,7 +56,7 @@ const section = () => {
             <button onClick={handleClick}>Search</button>
             <div style={{borderRadius:'10px', marginTop:40 ,textAlign:'left',width:'70%',paddingLeft:10, maxWidth:'600px',position:'absolute',color:'black', background:' linear-gradient(135deg,#0056b3 ,#003366 )',textDecoration:'none',listStyleType:'none'}}>
             {results.length>=1 && results.map((element,index)=>(
-                 <li style={{paddingTop:2}}><a href="/category" style={{textDecoration:'none',color:'white'}}>{index<10 && element.productName}</a></li>
+                 <li style={{paddingTop:2}}><a href="/category" style={{textDecoration:'none',color:'white'}}>{index<10 &&  element.productName}</a></li>
                  ))}
              </div>
         </div>
@@ -65,7 +69,7 @@ const section = () => {
 <section className="review-section">
    <h2 style={{textAlign:"center",paddingBottom:15}} >Your opinion matters</h2>
    <p>GlobalReview.com is a community of consumers helping each other make better purchasing decisions.</p>
-   {token?<a href="/review" className="review-button">Write a review</a>:<a className="review-button" onClick={(e)=> toast.warn("To write a review Login First")
+   {token?<Link to="/review" className="review-button">Write a review</Link>:<a className="review-button" onClick={(e)=> toast.warn("To write a review Login First")
     
    }>Login to Review</a>}
    
@@ -119,9 +123,9 @@ const section = () => {
 
         <div className="review-grid">
        
-         {reviewlist.toReversed().map((element,index)=>(
+         {latestone.toReversed().map((element,index)=>(
             <>
-           {index<3  && <div className="review-card">
+           {index<3  && element.status==="Approved" && <div className="review-card">
                 <h3>{element.productName}</h3>
                 <div className="reviewer-info">
                     <img src={`http://localhost:5500/uploads/${element.image}`} style={{   width: 160,

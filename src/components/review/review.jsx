@@ -1,8 +1,10 @@
 import './review.css';
+import {useNavigate } from "react-router-dom"
 import React, { useRef, useState } from 'react'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 function reviews() {
+  const navigate = useNavigate()
 
   // const [image, setImage] = useState(false);
   const [data, setData] = useState({
@@ -74,12 +76,13 @@ function reviews() {
                   fileInput.current.value="";
                 }
               toast.success(res.data.message)
+              navigate("/");
            }
            else{
               toast.error(res.data.message);
            }
         } 
-    }
+    } 
 //     useEffect(() => {
 //       setData({
                
@@ -193,6 +196,7 @@ function reviews() {
                 <input onChange={onChangeHandler} value={data.userName} type="text" id="username" name='userName' placeholder="Enter your name"/>
             </div>
             <button type="submit" className="submit-btn">Submit Review</button>
+            
         </form>
     </div>
     </div>

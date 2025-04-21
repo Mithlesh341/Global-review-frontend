@@ -9,6 +9,7 @@ import Search from '../components/Home/Search/Search.jsx'
 import ProtectedRoute from '../components/Home/protectedRoute/protectedRoute.jsx'
 import { StoreContext } from '../context/StoreContext.jsx';
 import { useContext } from 'react'
+import Terms from '../components/Home/signup/terms.jsx'
 //import Signin from '../components/Home/signin/signin.jsx'
 
 const utils = () => {
@@ -23,7 +24,7 @@ const utils = () => {
         <Route path='/signin' element={<SignIn/>}></Route>
         <Route path='/category' element={<Category/>} ></Route>
         <Route path='/searchresults' element={<Search/>}></Route>
-
+        <Route path='/terms' element={<Terms/>}> </Route>
       </Routes>
     </div>
   )

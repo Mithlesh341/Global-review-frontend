@@ -8,7 +8,7 @@ import Logout from '../../../assets/logout_icon.png';
 import profile from '../../../assets/profile_icon.png';
 
 const Navbar = ({ setShowLogin }) => {
-  const url = "http://localhost:5173/signin";
+ // const url = "http://localhost:5173/signin";
   const { token, setToken } = useContext(StoreContext);
 
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const Navbar = ({ setShowLogin }) => {
   // Logging out the user
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
     setToken(""); // Update state immediately
     navigate("/"); // Redirect to home
   };
@@ -37,8 +38,9 @@ const Navbar = ({ setShowLogin }) => {
           <div className="dropdown">
             <a href="/category" className="more">Categories</a>
           </div>
-          <Link to={url} style={{ marginRight: "0px", paddingRight: "20px" }}><button style={{fontWeight:'bold'}}>Sign Up</button></Link>
-
+          {!localStorage.getItem("token") &&
+          <Link to='/signin' style={{ marginRight: "0px", paddingRight: "20px" }}><button style={{fontWeight:'bold'}}>Register</button></Link>
+}
           {!token ? (
             
            <Link to='/login'><button onClick={() => setShowLogin(true)}  style={{ marginLeft: "0px", paddingLeft: "15px" }}>

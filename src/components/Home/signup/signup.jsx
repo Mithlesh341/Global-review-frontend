@@ -1,18 +1,20 @@
 import React from 'react'
-import { useState} from 'react';
+import { useState,useContext} from 'react';
 import './signup.css'
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import {useNavigate} from 'react-router-dom'
-
+import { StoreContext } from '../../../context/StoreContext';
 
 
 const signin = () => {
   const nav=useNavigate();
+  //  const {username,setUsername} = useContext(StoreContext);
   const [user,setUser]=useState({
     yourName:"",
     yourEmail:"",
-    yourPassword:""
+    yourPassword:"",
+    phone:""
    });
    const onChangeButton=(e)=>
    {
@@ -23,7 +25,7 @@ const signin = () => {
     e.preventDefault();
     // const formData = new FormData();
      let data={
-      yourName:user.yourName,yourEmail:user.yourEmail,yourPassword:user.yourPassword
+      yourName:user.yourName,yourEmail:user.yourEmail,yourPassword:user.yourPassword,phone:user.phone
      };
 
     // formData.append("yourName", user.yourName); // "file" matches backend multer setup
@@ -33,13 +35,17 @@ const signin = () => {
     if(res.status===200)
     {
       let token=res.data.token;
+      let user=res.data.yourName;
       localStorage.setItem("token",token);
+      localStorage.setItem("username",user);
+      // setUsername(user);
       console.log("successfully created user"+token);
        if(res.data.success){
                     setUser({
                      yourName:"",
                      yourEmail:"",
-                     yourPassword:""
+                     yourPassword:"",
+                     phone:""
                     })
                     toast.success(res.data.message)
                     nav("/");
@@ -56,7 +62,7 @@ const signin = () => {
        <div className='login-popup'>
       <form  className="login-popup-container" onSubmit={onSubmitButton}>
         <div className="login-popup-title">
-            <h2>Sign Up</h2>
+            <h2>Register</h2>
 {/* 
             <img   alt="" /> */}
         </div>
@@ -65,13 +71,13 @@ const signin = () => {
             
             <input name='yourEmail' onChange={onChangeButton} type="text"   value={user.yourEmail} placeholder='Your Email' required />
             <input name='yourPassword' onChange={onChangeButton} type="password" value={user.yourPassword}    placeholder='Password' required/>
-
+            <input name='phone' onChange={onChangeButton} type="text" value={user.phone}  minLength={10} maxLength={10}  placeholder='Phone Number' required/>
         </div>
         <button type='submit'>Create Account</button>
         <div style={{display:'flex', justifyItems:'start'}}>
          <input style={{width:24,height:24}} type="checkbox" required/>
         <div className="login-popup-condition">
-          <p style={{paddingLeft: 15, paddingTop: 10}}>By continuing, i agree to the terms of use & privacy policy.</p>
+          <p style={{paddingLeft: 15, paddingTop: 10}}>By continuing, i agree to the <a href = '/terms' style={{cursor:'pointer', color:"blue"}}>terms and conditions.</a></p>
         </div>
         </div>
         {/* {currState==="Login"

@@ -104,16 +104,21 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import './category.css';
 import ReviewDisplay from '../../reviewDisplay/reviewDisplay';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { StoreContext } from '../../../context/StoreContext';
 
 const Category = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortByRating, setSortByRating] = useState(null); // null = no sorting, "asc" = ascending, "desc" = descending
-
+ const selectedOne=selectedCategory;
+ const {selCategory,setSelCategory}=useContext(StoreContext);
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
+    setSelCategory(category);
   };
 
   const handleSortChange = (order) => {
@@ -140,7 +145,7 @@ const Category = () => {
                   className={selectedCategory === category ? "active-category" : ""}
                   style={{ cursor: "pointer" }}
                 >
-                  <div>{category}</div>
+                  <div style={{color:'white'}}>{category}</div>
                 </a>
               </li>
             ))}
@@ -152,15 +157,21 @@ const Category = () => {
             <label>Sort by Rating: </label>
             <button onClick={() => handleSortChange("desc")} style={{marginRight:10,marginTop:10}}>High to Low</button>
             <button onClick={() => handleSortChange("asc")} style={{marginRight:10,marginTop:10}}>Low to High</button>
+            {/* <section className="review-section"> */}
+   {/* <h2 style={{textAlign:"center",paddingBottom:15}} >Your opinion matters</h2>
+   <p>GlobalReview.com is a community of consumers helping each other make better purchasing decisions.</p> */}
+   {selectedCategory!="All" && <>  {localStorage.getItem("token")?<Link to="/review" className="review-button">Write a review</Link>:<a className="review-button" href='/login'  onClick={(e)=> toast.warn("To write a review Login First")
+    
+}>Login to Review</a> }</>} 
           </div>
           <ReviewDisplay selectedCategory={selectedCategory} sortByRating={sortByRating} />
         </div>
       </section>
     </div>
-  );
+  )
 };
 
-export default Category;
+export default Category ;
 
 
 

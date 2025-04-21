@@ -13,6 +13,8 @@ const StoreContextProvider = (props) => {
     const url = "http://localhost:5500"
     const [token, setToken] = useState("");
     const [reviewlist, setReviewList] = useState([]);
+    const [username,setUsername]=useState("");
+    const [selCategory,setSelCategory]=useState("All");
 
 
     const fetchReviewList = async () => {
@@ -37,6 +39,10 @@ const StoreContextProvider = (props) => {
         url,
         token,
         setToken,
+        username,
+        setUsername,
+        selCategory,
+        setSelCategory
     }
   
     return (

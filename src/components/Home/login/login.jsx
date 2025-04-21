@@ -1,10 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState ,useContext} from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { StoreContext } from '../../../context/StoreContext';
 function login() {
   const nav=useNavigate();
+  //  const {username,setUsername} = useContext(StoreContext);
   const [user,setUser]=useState({
     yourEmail:"",
     yourPassword:""
@@ -28,8 +30,15 @@ function login() {
     if(res.status===200)
     {
       let token=res.data.token;
+      let user=res.data.yourName;
+      console.log("hello");
+      // console.log(user);
       localStorage.setItem("token",token);
-      console.log("successfully created user"+token);
+      localStorage.setItem("username",user);
+      let z=localStorage.getItem("username");
+      // setUsername(user);
+      console.log(localStorage.getItem("username"));
+      // console.log("successfully created user"+token);
        if(res.data.success){
                     setUser({
                      yourEmail:"",
@@ -59,12 +68,12 @@ function login() {
                 <input name='yourPassword' type="password" onChange={onChangeButton} placeholder='Password' required/>
             </div>
             <button type='submit'>Login</button>
-            <div style={{display:'flex', justifyItems:'start'}}>
+            {/* <div style={{display:'flex', justifyItems:'start'}}>
              <input style={{width:24,height:24}} type="checkbox" required/>
             <div className="login-popup-condition">
               <p style={{paddingLeft: 15, paddingTop: 10}}>By continuing, i agree to the terms of use & privacy policy.</p>
             </div>
-            </div>
+            </div> */}
            
           </form>
         </div>

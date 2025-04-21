@@ -1,11 +1,13 @@
 import './review.css';
 import {useNavigate } from "react-router-dom"
 import React, { useRef, useState } from 'react'
+import { useContext } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { StoreContext } from '../../context/StoreContext';
 function reviews() {
+  const {selCategory}=useContext(StoreContext);
   const navigate = useNavigate()
-
   // const [image, setImage] = useState(false);
   const [data, setData] = useState({
     productName:"",
@@ -16,7 +18,7 @@ function reviews() {
     
     review:"",
     //image:image,
-    userName:"",
+    username:localStorage.getItem("username"),
    image:""
   })
 
@@ -47,11 +49,11 @@ function reviews() {
     const formData = new FormData();
     formData.append("image", data.image); // "file" matches backend multer setup
     formData.append("productName", data.productName);
-    formData.append("productCategory", data.productCategory);
+    formData.append("productCategory",selCategory);
     formData.append("rating", data.rating);
     formData.append("reviewTitle", data.reviewTitle);
     formData.append("review", data.review);
-    formData.append("userName", data.userName);
+    formData.append("userName",localStorage.getItem("username"));
     // for (let [key, value] of formData.entries()) {
     //     console.log(${key}:, value);
     //   }
@@ -61,6 +63,7 @@ function reviews() {
       if(res.status===200)
         {
             console.log("successfully submitted form");
+            // Window.location.reload();
             if(res.data.success){
                 setData({
                   productName: "",
@@ -131,14 +134,11 @@ function reviews() {
     <div className="review-container">
         <h2>Write a Product Review</h2>
         <form onSubmit={clickSubmit} encType='multipart/form-data'>
-            <div className="form-group">
-                <label htmlFor="product-name">Product Name</label>
-                <input onChange={onChangeHandler} value={data.productName} name='productName' type="text" id="product-name" placeholder="Enter product name" required/>
-            </div>
+           
 
             <div className="form-group">
                 <label htmlFor="product-category">Product Category</label>
-                <select onChange={onChangeHandler} name='productCategory' id="product-category" value={data.productCategory} required>
+                <select onChange={onChangeHandler} name='productCategory' id="product-category" value={selCategory} required>
                     <option value="">Select Category</option>
                     <option value="Appliances">Appliances</option>
                     <option value="Beauty">Beauty</option>
@@ -162,6 +162,11 @@ function reviews() {
                     <option value="WashingMachine">Washing Machine</option>
                     <option value="Others">Other</option>
                 </select>
+            </div>
+
+            <div className="form-group">
+                <label htmlFor="product-name">Product Name</label>
+                <input onChange={onChangeHandler} value={data.productName} name='productName' type="text" id="product-name" placeholder="Enter product name" required/>
             </div>
 
             <div className="form-group">
@@ -193,7 +198,7 @@ function reviews() {
 
             <div className="form-group">
                 <label htmlFor="username">Your Name (Optional)</label>
-                <input onChange={onChangeHandler} value={data.userName} type="text" id="username" name='userName' placeholder="Enter your name"/>
+                <input onChange={onChangeHandler} style={{color:'black'}} value={String(localStorage.getItem("username"))} type="text" id="username" name='userName' placeholder={localStorage.getItem("username")}/>
             </div>
             <button type="submit" className="submit-btn">Submit Review</button>
             

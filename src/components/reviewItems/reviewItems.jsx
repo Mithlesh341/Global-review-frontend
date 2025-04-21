@@ -104,7 +104,7 @@ const ProductDetails = ({ productName,
  <div className="review-grid" style={{gridGap:'100px'}}>
        
 <div className="review-card"> 
-    <h3>{productName}</h3>
+    <h3 style={{fontSize:22,fontWeight:"bold"}}>{productName}</h3>
     <div className="reviewer-info">
         <img src={`http://localhost:5500/uploads/${image}`} style={{   width: 160,
     height: 160 , borderRadius: '10px'}} alt="No image found"/>

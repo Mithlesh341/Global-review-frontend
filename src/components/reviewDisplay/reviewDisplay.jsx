@@ -131,6 +131,7 @@ const ReviewDisplay = ({ selectedCategory, sortByRating }) => {
   }
 
   return (
+    <>
     <div className='food-display' id='food-display'>
       <h2>Know Your Product Reviews</h2>
       <div className="food-display-list">
@@ -156,6 +157,7 @@ const ReviewDisplay = ({ selectedCategory, sortByRating }) => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

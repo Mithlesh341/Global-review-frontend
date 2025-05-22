@@ -88,3 +88,9 @@ body {
     margin-right: 20px;
     padding: 10px;
 }
+@media (max-width:400px) {
+    .navbar .logo p 
+    {
+        font-size:large;
+    }
+}

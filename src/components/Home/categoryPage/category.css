@@ -17,7 +17,7 @@
     padding: 20px;
     height: 100vh;
     position: fixed;
-    overflow-y: auto;
+    overflow-y:auto;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
 }
 .sidebar h2 {
@@ -96,4 +96,49 @@ button {
 }
 button:hover {
     background: linear-gradient(135deg,#003366 ,#0056b3 );
+}
+.togglebutton
+{
+width:30px;
+height:30px;
+border-radius:'3px 3px 3px 3px';
+display: none;
+}
+@media (max-width:900px)
+{
+    .togglebutton
+    {
+        display:inline-block;
+    }
+    .content {
+    margin-left:0px;
+    padding:20px;
+    flex: 1;
+    
+}
+.sort-options
+{
+    display: flex;
+     width: 200px;
+    flex-direction: column;
+}
+.review-button
+{
+    width: 200px;
+    margin-top: 8px;
+    margin-right: 10px;
+    text-align: center;
+}
+}
+@media (max-width:800px)
+{
+ .sort-options
+{
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+    padding-left: 60px;
+    padding-right: 0px;
+}  
+
 }

@@ -22,3 +22,10 @@
     gap: 30px;
     row-gap: 50px;
 }
+@media (max-width:800px) {
+    .food-display h2 
+    {
+     padding-left: 60px;
+     font-size: xxx-large;
+    }
+}

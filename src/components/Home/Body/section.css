@@ -566,3 +566,19 @@ a {
     list-style-type: none;
   }
   
+  @media (max-width:600px)
+  {
+    .search-bar {
+    width: 90%;
+}
+.hero{
+     background-size:1500px;
+   }
+  }
+ @media (max-width:400px)
+  {
+    .search-bar {
+    width: 100%;
+    padding: 2px;
+}
+  }

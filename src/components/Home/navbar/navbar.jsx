@@ -33,7 +33,7 @@ const Navbar = ({ setShowLogin }) => {
         <div className="logo">
             <img src={image} style={{ width: 100, height: 65, paddingLeft:"5px", marginRight:"20px", marginLeft:"0px"}} alt="logo" />
           <p style={{ paddingTop: 18 }}> GLOBAL REVIEW </p>
-           {screen.width<769 && hidden &&
+           {screen.width<769 &&
           <div onClick={(e)=>{setHidden(!hidden)}} style={{marginTop:15,paddingLeft:20}} >
            <svg xmlns="http://www.w3.org/2000/svg"  style={{width:20,height:20}} viewBox="0 0 24 24" fill="white"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg>
          </div>
@@ -41,10 +41,10 @@ const Navbar = ({ setShowLogin }) => {
         </div>
 
           {screen.width<769 && !hidden &&
-          <div  style={{display:'flex',right:4,top:0,backgroundColor:'white', position:'absolute',flexDirection:'column',borderRadius:'3px'}}>
-          <div className='togglebutton' onClick={(e)=>{setHidden(!hidden)}} >
+          <div  style={{display:'flex',right:0,top:50,backgroundColor:'white', position:'absolute',flexDirection:'column',borderRadius:'3px'}}>
+          {/* <div className='togglebutton' onClick={(e)=>{setHidden(!hidden)}} >
            <svg xmlns="http://www.w3.org/2000/svg"  style={{width:20,height:20}} viewBox="0 0 24 24" fill="blue"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg>
-         </div>
+          </div> */}
           <div style={{marginTop:10,marginLeft:10,marginRight:10}}>
             <a href="/category">Categories</a>
           </div>

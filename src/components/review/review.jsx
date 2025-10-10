@@ -57,7 +57,7 @@ function reviews() {
     // for (let [key, value] of formData.entries()) {
     //     console.log(${key}:, value);
     //   }
-      const res=await axios.post("http://localhost:5500/api/review/add",formData, {
+      const res=await axios.post(`${import.meta.env.VITE_PUBLIC_URL}/api/review/add`,formData, {
         headers: { "Content-Type": "multipart/form-data" }, // Required for file uploads
       });
       if(res.status===200)

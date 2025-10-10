@@ -282,7 +282,7 @@ const Section = () => {
                       <div className="review-card1" key={index}>
                         <h3 style={{fontSize:25,fontWeight:"bold",paddingBottom:6}}>{element.productName}</h3>
                         <div className="reviewer-info1">
-                          <img src={`http://localhost:5500/uploads/${element.image}`} alt="User" />
+                          <img src={`${import.meta.env.VITE_PUBLIC_URL}/uploads/${element.image}`} alt="User" />
                           <div>
                             <strong>{element.reviewTitle}</strong> <span>{element.userName}</span>
                             <div className="stars">{element.rating}★</div>

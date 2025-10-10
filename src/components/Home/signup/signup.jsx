@@ -31,7 +31,7 @@ const signin = () => {
     // formData.append("yourName", user.yourName); // "file" matches backend multer setup
     // formData.append("yourEmail",user.yourName);
     // formData.append("yourPassword",user.yourPassword);
-    const res=await axios.post("http://localhost:5500/api/review/signup",data);
+    const res=await axios.post(`${import.meta.env.VITE_PUBLIC_URL}/api/review/signup`,data);
     if(res.status===200)
     {
       let token=res.data.token;

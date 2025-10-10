@@ -12,7 +12,7 @@ function Search() {
            <div className="review-card">
                 <h3>{element.productName}</h3>
                 <div className="reviewer-info">
-                    <img src={`http://localhost:5500/uploads/${element.image}`} style={{   width: 160,
+                    <img src={`${import.meta.env.VITE_PUBLIC_URL}/uploads/${element.image}`} style={{   width: 160,
     height: 160 , borderRadius: '10px'}}  alt="User Image"/>
                     <div>
                         <strong>{element.reviewTitle}</strong> <span>{element.userName}</span>

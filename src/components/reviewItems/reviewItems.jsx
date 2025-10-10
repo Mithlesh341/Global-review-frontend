@@ -106,7 +106,7 @@ const ProductDetails = ({ productName,
 <div className="review-card"> 
     <h3 style={{fontSize:22,fontWeight:"bold"}}>{productName}</h3>
     <div className="reviewer-info">
-        <img src={`http://localhost:5500/uploads/${image}`} style={{   width: 160,
+        <img src={`${import.meta.env.VITE_PUBLIC_URL}/uploads/${image}`} style={{   width: 160,
     height: 160 , borderRadius: '10px'}} alt="No image found"/>
         <div>
             <strong>{reviewTitle}</strong>   <span>{userName}</span>

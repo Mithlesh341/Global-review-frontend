@@ -4,13 +4,13 @@ import { createContext, useEffect } from "react";
 import { useState } from "react";
 
 export const StoreContext = createContext(null)
-const url = 'http://localhost:5500'
+const url = import.meta.env.VITE_PUBLIC_URL;
 
 
 const StoreContextProvider = (props) => {
 
    
-    const url = "http://localhost:5500"
+    const url =import.meta.env.VITE_PUBLIC_URL;
     const [token, setToken] = useState("");
     const [reviewlist, setReviewList] = useState([]);
     const [username,setUsername]=useState("");
